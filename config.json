@@ -1,0 +1,28 @@
+{
+  "recipientName": "Milo",
+  "nickname": "Milo Bear",
+  "age": "2",
+  "senderName": "Jarock",
+  "relationship": "Your big best friend",
+  "favoriteColor": "#6FAF8F",
+  "photos": [
+    "photo-1.jpg",
+    "photo-2.jpg",
+    "photo-3.jpg"
+  ],
+  "memories": [
+    {
+      "date": "Just a sleepy Milo",
+      "text": "Milo completely knocked out, sleeping peacefully."
+    },
+    {
+      "date": "Milo & Shiloh",
+      "text": "Milo spending a little time with his brother Shiloh."
+    },
+    {
+      "date": "Just being Milo",
+      "text": "Milo laying down on the ground, just being his goofy little self."
+    }
+  ],
+  "message": "Happy 2nd birthday, Milo. You’re my little best friend, and somehow you make every day better just by being around. I’m glad I get to grow up with you. Love you, buddy."
+}
