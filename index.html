@@ -49,6 +49,7 @@
       width: 100%;
       height: 100%;
       min-height: 100%;
+
       overflow: hidden;
 
       background-color: var(--canvas-bg);
@@ -69,7 +70,9 @@
     #pigment-wash {
       position: absolute;
       inset: 0;
+
       pointer-events: none;
+
       z-index: 0;
 
       background:
@@ -81,6 +84,7 @@
         );
 
       opacity: 0;
+
       transition: opacity 3s ease;
     }
 
@@ -118,6 +122,7 @@
       justify-content: center;
 
       pointer-events: none;
+
       z-index: 1;
     }
 
@@ -144,15 +149,21 @@
     }
 
     #mem-0 .photo-frame {
-      transform: rotate(-1.5deg) translateY(-2vh);
+      transform:
+        rotate(-1.5deg)
+        translateY(-2vh);
     }
 
     #mem-1 .photo-frame {
-      transform: rotate(1deg) translateY(2vh);
+      transform:
+        rotate(1deg)
+        translateY(2vh);
     }
 
     #mem-2 .photo-frame {
-      transform: rotate(-0.5deg) translateY(-1vh);
+      transform:
+        rotate(-0.5deg)
+        translateY(-1vh);
     }
 
     .memory-stage.active {
@@ -162,7 +173,10 @@
 
     .memory-stage.retiring {
       opacity: 0.15;
-      filter: blur(4px) grayscale(0.5);
+
+      filter:
+        blur(4px)
+        grayscale(0.5);
 
       z-index: -1;
 
@@ -202,10 +216,13 @@
       content: '';
 
       position: absolute;
+
       inset: -22%;
 
       background-image: var(--photo-bg);
+
       background-size: cover;
+
       background-position: center;
 
       filter: blur(28px);
@@ -221,9 +238,14 @@
       content: '';
 
       position: absolute;
+
       inset: 0;
 
-      background: rgba(var(--pigment-rgb), 0.10);
+      background:
+        rgba(
+          var(--pigment-rgb),
+          0.10
+        );
 
       mix-blend-mode: multiply;
 
@@ -241,6 +263,7 @@
       height: 100%;
 
       object-fit: contain;
+
       object-position: center;
 
       display: block;
@@ -259,7 +282,8 @@
 
       text-align: center;
 
-      max-width: min(76vw, 320px);
+      max-width:
+        min(76vw, 320px);
 
       opacity: 0;
 
@@ -268,18 +292,22 @@
     }
 
     #mem-0 .memory-text-wrap {
-      transform: translateX(-4px);
+      transform:
+        translateX(-4px);
     }
 
     #mem-1 .memory-text-wrap {
-      transform: translateX(6px);
+      transform:
+        translateX(6px);
     }
 
     #mem-2 .memory-text-wrap {
-      transform: translateX(-2px);
+      transform:
+        translateX(-2px);
     }
 
-    .memory-stage.revealed .memory-text-wrap {
+    .memory-stage.revealed
+    .memory-text-wrap {
       opacity: 1;
     }
 
@@ -298,7 +326,12 @@
     .memory-caption {
       font-family: var(--font-display);
 
-      font-size: clamp(20px, 5.5vw, 26px);
+      font-size:
+        clamp(
+          20px,
+          5.5vw,
+          26px
+        );
 
       line-height: 1.35;
 
@@ -326,7 +359,9 @@
       justify-content: center;
 
       opacity: 0;
+
       pointer-events: none;
+
       visibility: hidden;
 
       z-index: 5;
@@ -348,15 +383,12 @@
       visibility: visible;
     }
 
-    /* ============================================================
-       FINALE PHOTOS
-       ============================================================ */
-
     .composition-cluster {
       position: absolute;
       inset: 0;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
@@ -370,7 +402,8 @@
     .cluster-fragment {
       position: absolute;
 
-      width: min(65vw, 240px);
+      width:
+        min(65vw, 240px);
 
       aspect-ratio: 3.5 / 5;
 
@@ -387,13 +420,15 @@
       overflow: hidden;
     }
 
-    #finale-layer.show .cluster-fragment {
+    #finale-layer.show
+    .cluster-fragment {
       opacity: 0.3;
 
       filter: blur(4px);
     }
 
     @keyframes drift1 {
+
       0%, 100% {
         transform:
           translate(-15vw, -10vh)
@@ -408,6 +443,7 @@
     }
 
     @keyframes drift2 {
+
       0%, 100% {
         transform:
           translate(10vw, -15vh)
@@ -422,6 +458,7 @@
     }
 
     @keyframes drift3 {
+
       0%, 100% {
         transform:
           translate(5vw, 15vh)
@@ -471,6 +508,7 @@
       height: 100%;
 
       object-fit: contain;
+
       object-position: center;
 
       display: block;
@@ -490,12 +528,16 @@
       text-align: center;
 
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
 
       margin-top: -12vh;
 
-      padding: 0 12px;
+      padding:
+        0
+        12px;
 
       pointer-events: none;
     }
@@ -527,14 +569,18 @@
       transition:
         opacity 2.5s ease 0.8s,
         filter 2.5s ease 0.8s,
-        transform 2.5s cubic-bezier(0.2, 1, 0.3, 1) 0.8s;
+        transform
+          2.5s
+          cubic-bezier(0.2, 1, 0.3, 1)
+          0.8s;
 
       max-width: 100%;
 
       overflow-wrap: anywhere;
     }
 
-    #finale-layer.show .recipient-name {
+    #finale-layer.show
+    .recipient-name {
       opacity: 1;
 
       filter: blur(0);
@@ -546,7 +592,9 @@
       margin-top: 18px;
 
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
 
       gap: 6px;
@@ -557,7 +605,8 @@
         opacity 2s ease 1.8s;
     }
 
-    #finale-layer.show .identity-context {
+    #finale-layer.show
+    .identity-context {
       opacity: 1;
     }
 
@@ -596,19 +645,23 @@
 
       opacity: 0;
 
-      transform: translateY(10px);
+      transform:
+        translateY(10px);
 
       transition:
         opacity 2s ease 2.5s,
         transform 2s ease 2.5s;
 
-      padding: 0 24px;
+      padding:
+        0 24px;
     }
 
-    #finale-layer.show .closing-letter {
+    #finale-layer.show
+    .closing-letter {
       opacity: 1;
 
-      transform: translateY(0);
+      transform:
+        translateY(0);
     }
 
     .letter-body {
@@ -683,15 +736,47 @@
     }
 
     /* ============================================================
-       LANDSCAPE
+       LANDSCAPE MEMORY COMPOSITION
        ============================================================ */
 
     @media (orientation: landscape) {
 
+      /*
+        This is the important fix.
+
+        Instead of trying to squeeze:
+
+            PHOTO
+            TEXT
+
+        into a short landscape screen,
+
+        landscape becomes:
+
+            PHOTO     MEMORY
+
+        The interaction remains identical.
+        The visual composition simply uses
+        the space that landscape actually gives us.
+      */
+
       .memory-stage {
+        flex-direction: row;
+
+        justify-content: center;
+
+        align-items: center;
+
+        gap:
+          clamp(
+            24px,
+            5vw,
+            70px
+          );
+
         padding:
-          18px
-          6vw;
+          20px
+          7vw;
       }
 
       .memory-stage .photo-frame {
@@ -700,38 +785,74 @@
             30vw,
             230px
           );
+
+        flex-shrink: 0;
       }
 
       .memory-text-wrap {
-        margin-top: 18px;
+
+        margin-top: 0;
 
         max-width:
           min(
-            48vw,
-            520px
+            38vw,
+            440px
           );
-      }
 
-      .memory-caption {
-        font-size:
-          clamp(
-            16px,
-            3vw,
-            22px
-          );
+        text-align: left;
+
+        flex-shrink: 1;
       }
 
       .memory-date {
-        margin-bottom: 7px;
 
         font-size: 11px;
+
+        margin-bottom: 8px;
+      }
+
+      .memory-caption {
+
+        font-size:
+          clamp(
+            17px,
+            3vw,
+            24px
+          );
+
+        line-height: 1.4;
+      }
+
+      #mem-0 .memory-text-wrap,
+      #mem-1 .memory-text-wrap,
+      #mem-2 .memory-text-wrap {
+        transform: none;
       }
 
       /*
-        Landscape finale:
-        the name sits high enough to leave
-        a completely separate area for the letter.
+        Keep the slight photographic personality,
+        but don't push the image vertically
+        anymore in landscape.
       */
+
+      #mem-0 .photo-frame {
+        transform:
+          rotate(-1.5deg);
+      }
+
+      #mem-1 .photo-frame {
+        transform:
+          rotate(1deg);
+      }
+
+      #mem-2 .photo-frame {
+        transform:
+          rotate(-0.5deg);
+      }
+
+      /* ========================================================
+         LANDSCAPE FINALE
+         ======================================================== */
 
       .identity-core {
         margin-top: -23vh;
@@ -742,6 +863,7 @@
       }
 
       .recipient-name {
+
         font-size:
           clamp(
             3.5rem,
@@ -763,6 +885,7 @@
       }
 
       .closing-letter {
+
         bottom: 6vh;
 
         max-width: 70vw;
@@ -773,6 +896,7 @@
       }
 
       .letter-body {
+
         font-size:
           clamp(
             12px,
@@ -786,6 +910,7 @@
       }
 
       .letter-signature {
+
         font-size:
           clamp(
             18px,
@@ -795,12 +920,18 @@
       }
 
       .letter-relation {
+
         font-size: 10px;
 
         margin-top: 3px;
       }
 
+      /* ========================================================
+         LANDSCAPE FINALE PHOTOS
+         ======================================================== */
+
       .cluster-fragment {
+
         width:
           min(
             27vw,
@@ -808,13 +939,8 @@
           );
       }
 
-      /*
-        Spread the background photos outward
-        in landscape so they don't occupy the
-        same territory as the name/message.
-      */
-
       @keyframes drift1Landscape {
+
         0%, 100% {
           transform:
             translate(-34vw, -17vh)
@@ -829,6 +955,7 @@
       }
 
       @keyframes drift2Landscape {
+
         0%, 100% {
           transform:
             translate(34vw, -14vh)
@@ -843,6 +970,7 @@
       }
 
       @keyframes drift3Landscape {
+
         0%, 100% {
           transform:
             translate(30vw, 22vh)
@@ -858,6 +986,7 @@
 
       #finale-layer.show
       .cluster-fragment:nth-child(1) {
+
         animation:
           drift1Landscape
           18s
@@ -867,6 +996,7 @@
 
       #finale-layer.show
       .cluster-fragment:nth-child(2) {
+
         animation:
           drift2Landscape
           22s
@@ -878,6 +1008,7 @@
 
       #finale-layer.show
       .cluster-fragment:nth-child(3) {
+
         animation:
           drift3Landscape
           20s
@@ -896,11 +1027,65 @@
       (orientation: landscape)
       and (max-height: 500px) {
 
+      .memory-stage {
+
+        gap:
+          clamp(
+            18px,
+            4vw,
+            42px
+          );
+
+        padding:
+          16px
+          5vw;
+      }
+
+      .memory-stage .photo-frame {
+
+        width:
+          min(
+            27vw,
+            190px
+          );
+      }
+
+      .memory-text-wrap {
+
+        max-width:
+          min(
+            42vw,
+            400px
+          );
+      }
+
+      .memory-caption {
+
+        font-size:
+          clamp(
+            15px,
+            3.2vw,
+            21px
+          );
+
+        line-height: 1.32;
+      }
+
+      .memory-date {
+
+        font-size: 10px;
+
+        margin-bottom: 6px;
+      }
+
+      /* Finale */
+
       .identity-core {
         margin-top: -25vh;
       }
 
       .recipient-name {
+
         font-size:
           clamp(
             3rem,
@@ -918,6 +1103,7 @@
       }
 
       .letter-body {
+
         font-size:
           clamp(
             11px,
@@ -931,6 +1117,7 @@
       }
 
       .letter-signature {
+
         font-size:
           clamp(
             16px,
@@ -956,7 +1143,12 @@
         max-width: 520px;
       }
 
+      .memory-caption {
+        font-size: 24px;
+      }
+
       .recipient-name {
+
         font-size:
           clamp(
             5rem,
@@ -987,9 +1179,15 @@
       .identity-context,
       .closing-letter,
       .cluster-fragment {
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
+
+        transition-duration:
+          0.01ms !important;
+
+        animation-duration:
+          0.01ms !important;
+
+        animation-iteration-count:
+          1 !important;
       }
     }
   </style>
@@ -1003,18 +1201,27 @@
 
     <div id="content-layer">
 
-      <div class="memory-stage" id="mem-0">
+      <div
+        class="memory-stage"
+        id="mem-0"
+      >
 
-        <div class="photo-frame" id="wrap-0">
+        <div
+          class="photo-frame"
+          id="wrap-0"
+        >
+
           <img
             id="img-0"
             src=""
             alt=""
             draggable="false"
           >
+
         </div>
 
         <div class="memory-text-wrap">
+
           <div
             class="memory-date"
             id="date-0"
@@ -1024,22 +1231,33 @@
             class="memory-caption"
             id="text-0"
           ></div>
+
         </div>
 
       </div>
 
-      <div class="memory-stage" id="mem-1">
 
-        <div class="photo-frame" id="wrap-1">
+      <div
+        class="memory-stage"
+        id="mem-1"
+      >
+
+        <div
+          class="photo-frame"
+          id="wrap-1"
+        >
+
           <img
             id="img-1"
             src=""
             alt=""
             draggable="false"
           >
+
         </div>
 
         <div class="memory-text-wrap">
+
           <div
             class="memory-date"
             id="date-1"
@@ -1049,22 +1267,33 @@
             class="memory-caption"
             id="text-1"
           ></div>
+
         </div>
 
       </div>
 
-      <div class="memory-stage" id="mem-2">
 
-        <div class="photo-frame" id="wrap-2">
+      <div
+        class="memory-stage"
+        id="mem-2"
+      >
+
+        <div
+          class="photo-frame"
+          id="wrap-2"
+        >
+
           <img
             id="img-2"
             src=""
             alt=""
             draggable="false"
           >
+
         </div>
 
         <div class="memory-text-wrap">
+
           <div
             class="memory-date"
             id="date-2"
@@ -1074,11 +1303,13 @@
             class="memory-caption"
             id="text-2"
           ></div>
+
         </div>
 
       </div>
 
     </div>
+
 
     <div id="finale-layer">
 
@@ -1110,6 +1341,7 @@
 
       </div>
 
+
       <div class="identity-core">
 
         <h1
@@ -1123,6 +1355,7 @@
         ></div>
 
       </div>
+
 
       <div class="closing-letter">
 
@@ -1145,11 +1378,16 @@
 
     </div>
 
-    <canvas id="canvas-powder"></canvas>
+
+    <canvas
+      id="canvas-powder"
+    ></canvas>
 
   </main>
 
+
   <script>
+
     /* ================================================================
        CONFIG
        ================================================================= */
@@ -1200,6 +1438,7 @@
           .replace("#", "")
           .trim();
 
+
       if (clean.length === 3) {
 
         clean =
@@ -1209,27 +1448,37 @@
             .join("");
       }
 
+
       const int =
         parseInt(clean, 16) || 0;
 
+
       return {
 
-        r: (int >> 16) & 255,
+        r:
+          (int >> 16) & 255,
 
-        g: (int >> 8) & 255,
+        g:
+          (int >> 8) & 255,
 
-        b: int & 255
+        b:
+          int & 255
 
       };
     }
 
 
-    function getLuminance(r, g, b) {
+    function getLuminance(
+      r,
+      g,
+      b
+    ) {
 
       const a =
         [r, g, b].map(v => {
 
           v /= 255;
+
 
           return v <= 0.03928
 
@@ -1240,6 +1489,7 @@
                 2.4
               );
         });
+
 
       return (
         0.2126 * a[0] +
@@ -1252,10 +1502,17 @@
     function getOrdinal(n) {
 
       const s =
-        ["th", "st", "nd", "rd"];
+        [
+          "th",
+          "st",
+          "nd",
+          "rd"
+        ];
+
 
       const v =
         n % 100;
+
 
       return (
         n +
@@ -1269,13 +1526,14 @@
 
 
     /* ================================================================
-       COLOR SYSTEM
+       COLOR
        ================================================================= */
 
     const rgb =
       hexToRgb(
         CONFIG.favoriteColor
       );
+
 
     const lum =
       getLuminance(
@@ -1284,23 +1542,31 @@
         rgb.b
       );
 
+
     const root =
       document.documentElement;
+
 
     root.style.setProperty(
       "--pigment",
       CONFIG.favoriteColor
     );
 
+
     root.style.setProperty(
       "--pigment-rgb",
       `${rgb.r}, ${rgb.g}, ${rgb.b}`
     );
 
+
     let powderTone = {
+
       r: 18,
+
       g: 18,
+
       b: 24
+
     };
 
 
@@ -1336,6 +1602,7 @@
         "rgba(0, 0, 0, 0.95)"
       );
 
+
       powderTone = {
 
         r:
@@ -1362,45 +1629,54 @@
           rgb.r * 0.04 + 8
         );
 
+
       const bgG =
         Math.floor(
           rgb.g * 0.04 + 8
         );
+
 
       const bgB =
         Math.floor(
           rgb.b * 0.04 + 10
         );
 
+
       root.style.setProperty(
         "--canvas-bg",
         `rgb(${bgR}, ${bgG}, ${bgB})`
       );
+
 
       root.style.setProperty(
         "--ink-primary",
         "#F4F4F5"
       );
 
+
       root.style.setProperty(
         "--ink-secondary",
         "rgba(244, 244, 245, 0.70)"
       );
+
 
       root.style.setProperty(
         "--ink-faint",
         "rgba(244, 244, 245, 0.35)"
       );
 
+
       root.style.setProperty(
         "--surface",
         "#0a0a0c"
       );
 
+
       root.style.setProperty(
         "--surface-shadow",
         "rgba(0, 0, 0, 0.85)"
       );
+
 
       if (lum < 0.10) {
 
@@ -1409,6 +1685,7 @@
           "#A1A1AA"
         );
       }
+
 
       powderTone = {
 
@@ -1432,7 +1709,7 @@
 
 
     /* ================================================================
-       POPULATE CONTENT
+       CONTENT
        ================================================================= */
 
     for (let i = 0; i < 3; i++) {
@@ -1442,33 +1719,40 @@
           `img-${i}`
         );
 
+
       const frag =
         document.getElementById(
           `frag-${i}`
         );
+
 
       const dateEl =
         document.getElementById(
           `date-${i}`
         );
 
+
       const textEl =
         document.getElementById(
           `text-${i}`
         );
+
 
       const wrapper =
         document.getElementById(
           `wrap-${i}`
         );
 
+
       if (CONFIG.photos[i]) {
 
         img.src =
           CONFIG.photos[i];
 
+
         frag.src =
           CONFIG.photos[i];
+
 
         wrapper.style.setProperty(
           "--photo-bg",
@@ -1476,10 +1760,12 @@
         );
       }
 
+
       if (CONFIG.memories[i]) {
 
         dateEl.textContent =
           CONFIG.memories[i].date;
+
 
         textEl.textContent =
           CONFIG.memories[i].text;
@@ -1488,11 +1774,13 @@
 
 
     /* ================================================================
-       FINALE
+       FINALE CONTENT
        ================================================================= */
 
     document
-      .getElementById("finale-name")
+      .getElementById(
+        "finale-name"
+      )
       .textContent =
       CONFIG.recipientName;
 
@@ -1506,10 +1794,14 @@
     if (CONFIG.age) {
 
       const birthdayEl =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
+
 
       birthdayEl.className =
         "identity-detail";
+
 
       birthdayEl.textContent =
         `Happy ${getOrdinal(CONFIG.age)} Birthday${
@@ -1518,6 +1810,7 @@
             : ""
         }`;
 
+
       contextBox.appendChild(
         birthdayEl
       );
@@ -1525,19 +1818,25 @@
 
 
     document
-      .getElementById("finale-msg")
+      .getElementById(
+        "finale-msg"
+      )
       .textContent =
       CONFIG.message;
 
 
     document
-      .getElementById("finale-from")
+      .getElementById(
+        "finale-from"
+      )
       .textContent =
       CONFIG.senderName || "";
 
 
     document
-      .getElementById("finale-relation")
+      .getElementById(
+        "finale-relation"
+      )
       .textContent =
       CONFIG.relationship || "";
 
@@ -1551,6 +1850,7 @@
         "canvas-powder"
       );
 
+
     const ctx =
       canvas.getContext(
         "2d",
@@ -1561,7 +1861,9 @@
 
 
     let W = 0;
+
     let H = 0;
+
     let dpr = 1;
 
 
@@ -1570,17 +1872,20 @@
         "canvas"
       );
 
+
     const puffCtx =
       puffCanvas.getContext(
         "2d"
       );
 
 
-    const PUFF_DIAMETER = 64;
+    const PUFF_DIAMETER =
+      64;
 
 
     puffCanvas.width =
       PUFF_DIAMETER;
+
 
     puffCanvas.height =
       PUFF_DIAMETER;
@@ -1624,10 +1929,12 @@
         col
       );
 
+
       grad.addColorStop(
         0.72,
         col
       );
+
 
       grad.addColorStop(
         1,
@@ -1668,8 +1975,10 @@
       W =
         window.innerWidth;
 
+
       H =
         window.innerHeight;
+
 
       dpr =
         Math.min(
@@ -1683,6 +1992,7 @@
           W * dpr
         );
 
+
       canvas.height =
         Math.round(
           H * dpr
@@ -1691,6 +2001,7 @@
 
       canvas.style.width =
         `${W}px`;
+
 
       canvas.style.height =
         `${H}px`;
@@ -1711,7 +2022,7 @@
 
 
     /* ================================================================
-       POWDER ENGINE
+       POWDER
        ================================================================= */
 
     let particles = [];
@@ -1725,6 +2036,21 @@
     let clearedCount = 0;
 
 
+    /*
+      This is the key to eliminating the desktop
+      resize teleport.
+
+      The powder remembers the exact photo
+      rectangle it was generated against.
+
+      When the photo moves or changes size,
+      particles are mapped from the OLD
+      rectangle into the NEW rectangle.
+    */
+
+    let powderAnchorRect = null;
+
+
     class PowderParticle {
 
       constructor(
@@ -1734,11 +2060,16 @@
         isBaseCover = true
       ) {
 
-        this.x = x;
+        this.x =
+          x;
 
-        this.y = y;
+        this.y =
+          y;
 
         this.radius =
+          radius;
+
+        this.originalRadius =
           radius;
 
         this.isBaseCover =
@@ -1784,6 +2115,7 @@
           this.x -
           touchX;
 
+
         const dy =
           this.y -
           touchY;
@@ -1825,6 +2157,7 @@
         this.x +=
           this.vx;
 
+
         this.y +=
           this.vy;
 
@@ -1832,12 +2165,14 @@
         this.vx *=
           0.93;
 
+
         this.vy *=
           0.93;
 
 
         this.scale +=
           0.015;
+
 
         this.alpha -=
           this.decay;
@@ -1863,6 +2198,7 @@
 
 
         ctx.drawImage(
+
           puffCanvas,
 
           this.x -
@@ -1903,25 +2239,32 @@
 
 
       /*
-        Critical responsive fix:
-
-        We don't use the canvas dimensions to
-        determine where the powder belongs.
-
-        We always use the LIVE DOM rectangle
-        of the actual photograph.
-
-        This means the powder follows the photo
-        after rotation, resize, browser resizing,
-        or mobile viewport changes.
+        Store the exact rectangle used to
+        create the powder.
       */
+
+      powderAnchorRect = {
+        left:
+          rect.left,
+
+        top:
+          rect.top,
+
+        width:
+          rect.width,
+
+        height:
+          rect.height
+      };
 
 
       const pad =
         12;
 
+
       const stepSize =
         13;
+
 
       const pRadius =
         26;
@@ -1931,13 +2274,16 @@
         rect.left -
         pad;
 
+
       const endX =
         rect.right +
         pad;
 
+
       const startY =
         rect.top -
         pad;
+
 
       const endY =
         rect.bottom +
@@ -1963,6 +2309,7 @@
           const jitterX =
             (Math.random() - 0.5) * 4;
 
+
           const jitterY =
             (Math.random() - 0.5) * 4;
 
@@ -1976,28 +2323,35 @@
 
           const p =
             new PowderParticle(
+
               x + jitterX,
+
               y + jitterY,
+
               pRadius,
+
               isInsidePhoto
             );
 
 
-          newParticles.push(p);
+          newParticles.push(
+            p
+          );
 
 
           if (isInsidePhoto) {
+
             totalCoverCount++;
           }
         }
       }
 
 
-      /*
-        Small atmospheric halo.
-      */
-
-      for (let i = 0; i < 90; i++) {
+      for (
+        let i = 0;
+        i < 90;
+        i++
+      ) {
 
         const x =
           rect.left +
@@ -2014,14 +2368,19 @@
 
 
         newParticles.push(
+
           new PowderParticle(
+
             x,
+
             y,
+
             pRadius *
               (
                 0.8 +
                 Math.random() * 0.4
               ),
+
             false
           )
         );
@@ -2077,6 +2436,7 @@
               i === step
             );
 
+
             if (i !== step) {
 
               el.classList.remove(
@@ -2087,102 +2447,276 @@
         );
 
 
-      /*
-        Force the browser to finish the
-        responsive layout before measuring
-        the photo.
+      requestAnimationFrame(
+        () => {
 
-        requestAnimationFrame gives CSS one
-        frame to settle after orientation/
-        viewport changes.
-      */
-
-      requestAnimationFrame(() => {
-
-        buildPowderForMemory(
-          step,
-          true
-        );
-
-        isTransitioning =
-          false;
+          buildPowderForMemory(
+            step,
+            true
+          );
 
 
-        document
-          .getElementById(
-            "pigment-wash"
-          )
-          .style.opacity =
-          "0.8";
+          isTransitioning =
+            false;
 
-      });
+
+          document
+            .getElementById(
+              "pigment-wash"
+            )
+            .style.opacity =
+            "0.8";
+        }
+      );
     }
 
 
     /* ================================================================
-       RESPONSIVE POWDER REBUILD
+       LIVE POWDER POSITIONING
        ================================================================= */
 
-    let resizeTimer = null;
+    function remapPowderToPhoto(
+      oldRect,
+      newRect
+    ) {
+
+      if (
+        !oldRect ||
+        !newRect ||
+        !particles.length
+      ) {
+        return;
+      }
+
+
+      const scaleX =
+        newRect.width /
+        Math.max(
+          1,
+          oldRect.width
+        );
+
+
+      const scaleY =
+        newRect.height /
+        Math.max(
+          1,
+          oldRect.height
+        );
+
+
+      const radiusScale =
+        Math.sqrt(
+          scaleX *
+          scaleY
+        );
+
+
+      const oldCenterX =
+        oldRect.left +
+        oldRect.width / 2;
+
+
+      const oldCenterY =
+        oldRect.top +
+        oldRect.height / 2;
+
+
+      const newCenterX =
+        newRect.left +
+        newRect.width / 2;
+
+
+      const newCenterY =
+        newRect.top +
+        newRect.height / 2;
+
+
+      particles.forEach(
+        p => {
+
+          /*
+            Base particles are mapped according
+            to their position inside the photo.
+
+            Atmospheric particles are moved using
+            the photo center so the whole cloud
+            travels naturally with it.
+          */
+
+          if (p.isBaseCover) {
+
+            const nx =
+              (
+                p.x -
+                oldRect.left
+              ) /
+              Math.max(
+                1,
+                oldRect.width
+              );
+
+
+            const ny =
+              (
+                p.y -
+                oldRect.top
+              ) /
+              Math.max(
+                1,
+                oldRect.height
+              );
+
+
+            p.x =
+              newRect.left +
+              nx *
+              newRect.width;
+
+
+            p.y =
+              newRect.top +
+              ny *
+              newRect.height;
+
+          } else {
+
+            p.x =
+              newCenterX +
+              (
+                p.x -
+                oldCenterX
+              ) *
+              scaleX;
+
+
+            p.y =
+              newCenterY +
+              (
+                p.y -
+                oldCenterY
+              ) *
+              scaleY;
+          }
+
+
+          /*
+            Keep the smoke physically proportional
+            when the photo changes size.
+          */
+
+          p.radius =
+            Math.max(
+              8,
+              Math.min(
+                42,
+                p.originalRadius *
+                radiusScale
+              )
+            );
+        }
+      );
+
+
+      powderAnchorRect = {
+        left:
+          newRect.left,
+
+        top:
+          newRect.top,
+
+        width:
+          newRect.width,
+
+        height:
+          newRect.height
+      };
+    }
+
+
+    /* ================================================================
+       VIEWPORT CHANGES
+       ================================================================= */
 
     let lastViewportWidth =
       window.innerWidth;
+
 
     let lastViewportHeight =
       window.innerHeight;
 
 
+    let resizeFrame = null;
+
+
     function handleViewportChange() {
 
-      const width =
+      const newWidth =
         window.innerWidth;
 
-      const height =
+
+      const newHeight =
         window.innerHeight;
 
 
       if (
-        width === lastViewportWidth &&
-        height === lastViewportHeight
+        newWidth ===
+          lastViewportWidth &&
+        newHeight ===
+          lastViewportHeight
       ) {
         return;
       }
 
 
       lastViewportWidth =
-        width;
+        newWidth;
+
 
       lastViewportHeight =
-        height;
+        newHeight;
 
 
       resizeCanvas();
 
 
-      clearTimeout(
-        resizeTimer
-      );
+      /*
+        Do this on the next animation frame.
+
+        No timeout.
+
+        No delayed teleport.
+
+        The powder is remapped directly to
+        wherever the photograph moved.
+      */
+
+      if (resizeFrame) {
+
+        cancelAnimationFrame(
+          resizeFrame
+        );
+      }
 
 
-      resizeTimer =
-        setTimeout(
+      resizeFrame =
+        requestAnimationFrame(
           () => {
 
-            /*
-              Do not interfere with the
-              finale.
+            resizeFrame =
+              null;
 
-              The finale is pure CSS and
-              responds naturally.
-            */
+
+            const finale =
+              document.getElementById(
+                "finale-layer"
+              );
+
 
             if (
-              document
-                .getElementById(
-                  "finale-layer"
-                )
-                .classList
-                .contains("show")
+              finale.classList.contains(
+                "show"
+              )
             ) {
 
               fitFinaleMessage();
@@ -2190,17 +2724,6 @@
               return;
             }
 
-
-            /*
-              If we're still revealing a
-              memory, rebuild the powder
-              around the photograph.
-
-              We intentionally do not do this
-              while the user is actively wiping,
-              because rebuilding underneath
-              their finger would feel broken.
-            */
 
             if (
               isInteracting ||
@@ -2221,22 +2744,6 @@
               return;
 
 
-            const wrapper =
-              activeStage.querySelector(
-                ".photo-frame"
-              );
-
-
-            if (!wrapper)
-              return;
-
-
-            /*
-              If the memory is already fully
-              revealed, there is no cover to
-              rebuild.
-            */
-
             if (
               activeStage.classList.contains(
                 "revealed"
@@ -2247,29 +2754,47 @@
             }
 
 
+            const wrapper =
+              activeStage.querySelector(
+                ".photo-frame"
+              );
+
+
+            if (!wrapper)
+              return;
+
+
+            const newRect =
+              wrapper.getBoundingClientRect();
+
+
             /*
-              Rebuild from scratch so there
-              cannot be stale particles from
-              the old orientation.
+              Directly map the existing particles
+              to the new photo location.
+
+              Nothing disappears.
+              Nothing waits 100ms.
+              Nothing gets regenerated.
             */
 
-            totalCoverCount =
-              0;
+            remapPowderToPhoto(
+              powderAnchorRect,
+              {
+                left:
+                  newRect.left,
 
-            clearedCount =
-              0;
+                top:
+                  newRect.top,
 
-            particles =
-              [];
+                width:
+                  newRect.width,
 
-
-            buildPowderForMemory(
-              currentStep,
-              false
+                height:
+                  newRect.height
+              }
             );
 
-          },
-          100
+          }
         );
     }
 
@@ -2285,18 +2810,29 @@
       () => {
 
         /*
-          Orientation changes can report the
-          old dimensions for a moment on iOS.
+          iOS can emit orientationchange before
+          the final viewport dimensions settle.
+
+          We let resize events do the actual
+          remapping, while these two frames make
+          sure the final orientation gets one last
+          accurate measurement.
         */
+
+        requestAnimationFrame(
+          handleViewportChange
+        );
+
 
         setTimeout(
           handleViewportChange,
           120
         );
 
+
         setTimeout(
           handleViewportChange,
-          350
+          300
         );
       }
     );
@@ -2309,8 +2845,10 @@
     let isInteracting =
       false;
 
+
     let lastX =
       0;
+
 
     let lastY =
       0;
@@ -2374,11 +2912,6 @@
       }
 
 
-      /*
-        Keep the reveal threshold from
-        changing your current interaction.
-      */
-
       if (
         totalCoverCount > 0 &&
         (
@@ -2413,14 +2946,10 @@
       lastX =
         e.clientX;
 
+
       lastY =
         e.clientY;
 
-
-      /*
-        Pointer capture makes the interaction
-        more reliable on desktop browsers.
-      */
 
       try {
 
@@ -2449,6 +2978,7 @@
       const x =
         e.clientX;
 
+
       const y =
         e.clientY;
 
@@ -2456,6 +2986,7 @@
       const dx =
         x -
         lastX;
+
 
       const dy =
         y -
@@ -2488,6 +3019,7 @@
           lastX +
           (dx / steps) * i;
 
+
         const iy =
           lastY +
           (dy / steps) * i;
@@ -2504,6 +3036,7 @@
 
       lastX =
         x;
+
 
       lastY =
         y;
@@ -2539,15 +3072,18 @@
       onPointerDown
     );
 
+
     window.addEventListener(
       "pointermove",
       onPointerMove
     );
 
+
     window.addEventListener(
       "pointerup",
       onPointerUp
     );
+
 
     window.addEventListener(
       "pointercancel",
@@ -2556,7 +3092,7 @@
 
 
     /* ================================================================
-       MEMORY PROGRESSION
+       PROGRESSION
        ================================================================= */
 
     function triggerMemoryRevealed() {
@@ -2580,10 +3116,6 @@
       );
 
 
-      /*
-        Release the remaining powder.
-      */
-
       particles.forEach(
         p => {
 
@@ -2592,11 +3124,14 @@
             p.active =
               true;
 
+
             p.vx =
               (Math.random() - 0.5) * 1.5;
 
+
             p.vy =
               -Math.random() * 1.8;
+
 
             p.decay =
               0.016 +
@@ -2663,11 +3198,14 @@
           p.active =
             true;
 
+
           p.vx =
             (Math.random() - 0.5) * 2.8;
 
+
           p.vy =
             (Math.random() - 0.5) * 2.8;
+
 
           p.decay =
             0.014;
@@ -2709,12 +3247,6 @@
           );
 
 
-          /*
-            Give the browser a moment to
-            calculate the final responsive
-            layout before fitting the message.
-          */
-
           requestAnimationFrame(
             () => {
 
@@ -2732,7 +3264,7 @@
 
 
     /* ================================================================
-       FINALE MESSAGE FITTING
+       FINALE MESSAGE FIT
        ================================================================= */
 
     function fitFinaleMessage() {
@@ -2752,32 +3284,15 @@
       }
 
 
-      const letter =
-        document.querySelector(
-          ".closing-letter"
-        );
-
-
       const body =
         document.getElementById(
           "finale-msg"
         );
 
 
-      if (
-        !letter ||
-        !body
-      ) {
+      if (!body)
         return;
-      }
 
-
-      /*
-        Landscape has significantly less
-        vertical room, so calculate the
-        available space rather than trusting
-        a fixed font size.
-      */
 
       const landscape =
         window.innerWidth >
@@ -2804,20 +3319,14 @@
         `${size}px`;
 
 
-      /*
-        We don't allow the message to consume
-        the signature's territory.
-
-        This keeps even long custom messages
-        from crashing into the name.
-      */
-
       const available =
         landscape
+
           ? Math.max(
               70,
               window.innerHeight * 0.24
             )
+
           : Math.max(
               100,
               window.innerHeight * 0.22
@@ -2825,45 +3334,20 @@
 
 
       while (
-        body.scrollHeight > available &&
-        size > minSize
+        body.scrollHeight >
+          available &&
+        size >
+          minSize
       ) {
 
-        size -= 0.5;
+        size -=
+          0.5;
+
 
         body.style.fontSize =
           `${size}px`;
       }
     }
-
-
-    window.addEventListener(
-      "resize",
-      () => {
-
-        requestAnimationFrame(
-          fitFinaleMessage
-        );
-
-      }
-    );
-
-
-    window.addEventListener(
-      "orientationchange",
-      () => {
-
-        setTimeout(
-          fitFinaleMessage,
-          150
-        );
-
-        setTimeout(
-          fitFinaleMessage,
-          400
-        );
-      }
-    );
 
 
     /* ================================================================
@@ -2887,7 +3371,9 @@
       for (
         let i =
           particles.length - 1;
+
         i >= 0;
+
         i--
       ) {
 
@@ -2930,7 +3416,7 @@
 
 
     /* ================================================================
-       IMAGE PRELOADING
+       IMAGE PRELOAD
        ================================================================= */
 
     function preloadImages() {
@@ -2941,7 +3427,10 @@
 
 
       if (!urls.length) {
-        generateCoverForMemory(0);
+
+        generateCoverForMemory(
+          0
+        );
 
         return;
       }
@@ -2964,12 +3453,6 @@
         launched =
           true;
 
-
-        /*
-          The browser now has the images and
-          layout available before we measure
-          the photo for the powder field.
-        */
 
         requestAnimationFrame(
           () => {
@@ -3001,9 +3484,11 @@
 
               remaining--;
 
+
               if (
                 remaining <= 0
               ) {
+
                 finish();
               }
             };
@@ -3012,19 +3497,16 @@
           image.onload =
             done;
 
+
           image.onerror =
             done;
+
 
           image.src =
             url;
         }
       );
 
-
-      /*
-        Safety fallback in case an external
-        image host takes too long.
-      */
 
       setTimeout(
         finish,
