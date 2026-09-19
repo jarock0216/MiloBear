@@ -2,21 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  />
+
   <title>A Gift</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Epilogue:wght@300;400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Epilogue:wght@300;400;500&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
     :root {
       --pigment: #8A5CF6;
       --pigment-rgb: 138, 92, 246;
+
       --canvas-bg: #09090b;
+
       --ink-primary: #F4F4F5;
       --ink-secondary: rgba(244, 244, 245, 0.70);
       --ink-faint: rgba(244, 244, 245, 0.35);
+
       --surface: #0a0a0c;
       --surface-shadow: rgba(0, 0, 0, 0.95);
 
@@ -38,12 +48,22 @@
     body {
       width: 100%;
       height: 100%;
+      min-height: 100%;
       overflow: hidden;
+
       background-color: var(--canvas-bg);
+
       font-family: var(--font-body);
       color: var(--ink-primary);
+
       touch-action: none;
+
       transition: background-color 1s ease;
+    }
+
+    body {
+      position: fixed;
+      inset: 0;
     }
 
     #pigment-wash {
@@ -51,6 +71,7 @@
       inset: 0;
       pointer-events: none;
       z-index: 0;
+
       background:
         radial-gradient(
           circle at 45% 40%,
@@ -58,6 +79,7 @@
           rgba(var(--pigment-rgb), 0.015) 50%,
           transparent 80%
         );
+
       opacity: 0;
       transition: opacity 3s ease;
     }
@@ -65,41 +87,60 @@
     #stage {
       position: absolute;
       inset: 0;
+
+      width: 100%;
+      height: 100%;
+
       overflow: hidden;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       z-index: 1;
     }
 
-    /* ==========================================================================
-       MEMORY FRAGMENTS
-       ========================================================================== */
+    /* ============================================================
+       MEMORY LAYER
+       ============================================================ */
 
     #content-layer {
       position: absolute;
       inset: 0;
+
+      width: 100%;
+      height: 100%;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       pointer-events: none;
       z-index: 1;
     }
 
     .memory-stage {
       position: absolute;
+      inset: 0;
+
       width: 100%;
       height: 100%;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       padding: 24px;
+
       opacity: 0;
       visibility: hidden;
-      transition: opacity 1.2s ease, filter 1.2s ease;
+
+      transition:
+        opacity 1.2s ease,
+        filter 1.2s ease;
     }
 
     #mem-0 .photo-frame {
@@ -122,76 +163,108 @@
     .memory-stage.retiring {
       opacity: 0.15;
       filter: blur(4px) grayscale(0.5);
+
       z-index: -1;
-      transition: opacity 2s ease, filter 2s ease;
+
+      transition:
+        opacity 2s ease,
+        filter 2s ease;
     }
 
-    /* ==========================================================================
-       FULL-PHOTO FRAME
-       ========================================================================== */
+    /* ============================================================
+       PHOTO
+       ============================================================ */
 
     .photo-frame {
       position: relative;
+
       width: min(72vw, 280px);
+
       aspect-ratio: 3.5 / 5;
+
+      flex-shrink: 0;
+
       background: var(--surface);
+
       box-shadow:
         0 30px 60px -20px var(--surface-shadow),
         0 0 80px -20px rgba(var(--pigment-rgb), 0.12),
         0 0 0 1px rgba(var(--pigment-rgb), 0.05);
+
       overflow: hidden;
+
       isolation: isolate;
+
+      will-change: transform;
     }
 
-    /*
-      The same photograph fills the frame underneath.
-      Because it is blurred and enlarged, it reads as
-      the photograph continuing outward rather than a border.
-    */
     .photo-frame::before {
       content: '';
+
       position: absolute;
       inset: -22%;
+
       background-image: var(--photo-bg);
       background-size: cover;
       background-position: center;
+
       filter: blur(28px);
+
       transform: scale(1.08);
+
       opacity: 0.60;
+
       z-index: -1;
     }
 
     .photo-frame::after {
       content: '';
+
       position: absolute;
       inset: 0;
+
       background: rgba(var(--pigment-rgb), 0.10);
+
       mix-blend-mode: multiply;
+
       pointer-events: none;
+
       z-index: 2;
     }
 
-    /*
-      contain keeps the entire original photograph visible.
-      No part of Milo gets cut off.
-    */
     .photo-frame img {
       position: relative;
+
       z-index: 1;
+
       width: 100%;
       height: 100%;
+
       object-fit: contain;
       object-position: center;
+
       display: block;
-      filter: contrast(1.05) brightness(0.95);
+
+      filter:
+        contrast(1.05)
+        brightness(0.95);
     }
+
+    /* ============================================================
+       MEMORY TEXT
+       ============================================================ */
 
     .memory-text-wrap {
       margin-top: 32px;
+
       text-align: center;
+
       max-width: min(76vw, 320px);
+
       opacity: 0;
-      transition: opacity 1.4s ease 0.4s;
+
+      transition:
+        opacity 1.4s ease 0.4s;
     }
 
     #mem-0 .memory-text-wrap {
@@ -212,166 +285,276 @@
 
     .memory-date {
       font-family: var(--font-body);
+
       font-size: 13px;
+
       font-style: italic;
+
       color: var(--ink-secondary);
+
       margin-bottom: 12px;
     }
 
     .memory-caption {
       font-family: var(--font-display);
+
       font-size: clamp(20px, 5.5vw, 26px);
+
       line-height: 1.35;
+
       font-weight: 300;
+
       color: var(--ink-primary);
+
+      overflow-wrap: anywhere;
     }
 
-    /* ==========================================================================
+    /* ============================================================
        FINALE
-       ========================================================================== */
+       ============================================================ */
 
     #finale-layer {
       position: absolute;
       inset: 0;
+
+      width: 100%;
+      height: 100%;
+
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       opacity: 0;
       pointer-events: none;
       visibility: hidden;
+
       z-index: 5;
-      transition: opacity 2s ease;
-      padding: 0 24px;
+
+      transition:
+        opacity 2s ease;
+
+      padding:
+        env(safe-area-inset-top)
+        24px
+        env(safe-area-inset-bottom);
     }
 
     #finale-layer.show {
       opacity: 1;
+
       pointer-events: auto;
+
       visibility: visible;
     }
+
+    /* ============================================================
+       FINALE PHOTOS
+       ============================================================ */
 
     .composition-cluster {
       position: absolute;
       inset: 0;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       z-index: 0;
+
       pointer-events: none;
+
+      overflow: hidden;
     }
 
     .cluster-fragment {
       position: absolute;
+
       width: min(65vw, 240px);
+
       aspect-ratio: 3.5 / 5;
+
       opacity: 0;
+
       filter: blur(12px);
-      transition: opacity 3s ease, filter 3s ease;
+
+      transition:
+        opacity 3s ease,
+        filter 3s ease;
+
       will-change: transform;
+
       overflow: hidden;
     }
 
     #finale-layer.show .cluster-fragment {
       opacity: 0.3;
+
       filter: blur(4px);
     }
 
     @keyframes drift1 {
       0%, 100% {
-        transform: translate(-15vw, -10vh) rotate(-8deg);
+        transform:
+          translate(-15vw, -10vh)
+          rotate(-8deg);
       }
 
       50% {
-        transform: translate(-13.5vw, -11.5vh) rotate(-7deg);
+        transform:
+          translate(-13.5vw, -11.5vh)
+          rotate(-7deg);
       }
     }
 
     @keyframes drift2 {
       0%, 100% {
-        transform: translate(10vw, -15vh) rotate(5deg);
+        transform:
+          translate(10vw, -15vh)
+          rotate(5deg);
       }
 
       50% {
-        transform: translate(11.5vw, -13.5vh) rotate(6deg);
+        transform:
+          translate(11.5vw, -13.5vh)
+          rotate(6deg);
       }
     }
 
     @keyframes drift3 {
       0%, 100% {
-        transform: translate(5vw, 15vh) rotate(-4deg);
+        transform:
+          translate(5vw, 15vh)
+          rotate(-4deg);
       }
 
       50% {
-        transform: translate(3.5vw, 16.5vh) rotate(-5deg);
+        transform:
+          translate(3.5vw, 16.5vh)
+          rotate(-5deg);
       }
     }
 
-    #finale-layer.show .cluster-fragment:nth-child(1) {
-      animation: drift1 18s ease-in-out infinite;
+    #finale-layer.show
+    .cluster-fragment:nth-child(1) {
+      animation:
+        drift1
+        18s
+        ease-in-out
+        infinite;
     }
 
-    #finale-layer.show .cluster-fragment:nth-child(2) {
-      animation: drift2 22s ease-in-out infinite;
+    #finale-layer.show
+    .cluster-fragment:nth-child(2) {
+      animation:
+        drift2
+        22s
+        ease-in-out
+        infinite;
+
       animation-delay: -3s;
     }
 
-    #finale-layer.show .cluster-fragment:nth-child(3) {
-      animation: drift3 20s ease-in-out infinite;
+    #finale-layer.show
+    .cluster-fragment:nth-child(3) {
+      animation:
+        drift3
+        20s
+        ease-in-out
+        infinite;
+
       animation-delay: -7s;
     }
 
-    /*
-      Entire photos remain visible in the finale too.
-    */
     .cluster-fragment img {
       width: 100%;
       height: 100%;
+
       object-fit: contain;
       object-position: center;
+
       display: block;
     }
 
+    /* ============================================================
+       IDENTITY
+       ============================================================ */
+
     .identity-core {
       position: relative;
+
       z-index: 10;
+
+      width: 100%;
+
       text-align: center;
+
       display: flex;
       flex-direction: column;
       align-items: center;
+
       margin-top: -12vh;
+
+      padding: 0 12px;
+
+      pointer-events: none;
     }
 
     .recipient-name {
       font-family: var(--font-display);
-      font-size: clamp(4.5rem, 18vw, 8rem);
+
+      font-size:
+        clamp(
+          4rem,
+          18vw,
+          8rem
+        );
+
       line-height: 0.85;
+
       font-weight: 300;
+
       letter-spacing: -0.02em;
+
       color: var(--ink-primary);
+
       opacity: 0;
+
       filter: blur(10px);
+
       transform: scale(0.98);
+
       transition:
         opacity 2.5s ease 0.8s,
         filter 2.5s ease 0.8s,
         transform 2.5s cubic-bezier(0.2, 1, 0.3, 1) 0.8s;
+
+      max-width: 100%;
+
+      overflow-wrap: anywhere;
     }
 
     #finale-layer.show .recipient-name {
       opacity: 1;
+
       filter: blur(0);
+
       transform: scale(1);
     }
 
     .identity-context {
       margin-top: 18px;
+
       display: flex;
       flex-direction: column;
       align-items: center;
+
       gap: 6px;
+
       opacity: 0;
-      transition: opacity 2s ease 1.8s;
+
+      transition:
+        opacity 2s ease 1.8s;
     }
 
     #finale-layer.show .identity-context {
@@ -380,65 +563,434 @@
 
     .identity-detail {
       font-family: var(--font-body);
+
       font-size: 14px;
+
       font-style: italic;
+
       color: var(--pigment);
+
+      max-width: 90vw;
     }
+
+    /* ============================================================
+       LETTER
+       ============================================================ */
 
     .closing-letter {
       position: absolute;
-      bottom: clamp(30px, 8vh, 60px);
+
+      bottom:
+        max(
+          30px,
+          env(safe-area-inset-bottom)
+        );
+
       width: 100%;
+
       max-width: 440px;
+
       text-align: center;
+
       z-index: 10;
+
       opacity: 0;
+
       transform: translateY(10px);
+
       transition:
         opacity 2s ease 2.5s,
         transform 2s ease 2.5s;
+
       padding: 0 24px;
     }
 
     #finale-layer.show .closing-letter {
       opacity: 1;
+
       transform: translateY(0);
     }
 
     .letter-body {
       font-family: var(--font-body);
-      font-size: clamp(15px, 4vw, 18px);
+
+      font-size:
+        clamp(
+          14px,
+          4vw,
+          18px
+        );
+
       line-height: 1.5;
+
       color: var(--ink-secondary);
+
       margin-bottom: 24px;
+
       white-space: pre-wrap;
+
+      overflow-wrap: anywhere;
+
+      max-width: 100%;
     }
 
     .letter-signature {
       font-family: var(--font-display);
-      font-size: clamp(22px, 5.5vw, 28px);
+
+      font-size:
+        clamp(
+          22px,
+          5.5vw,
+          28px
+        );
+
       font-style: italic;
+
       color: var(--ink-primary);
     }
 
     .letter-relation {
       font-family: var(--font-body);
+
       font-size: 12px;
+
       color: var(--ink-faint);
+
       margin-top: 6px;
     }
 
-    /* ==========================================================================
+    /* ============================================================
        POWDER
-       ========================================================================== */
+       ============================================================ */
 
     #canvas-powder {
       position: absolute;
+
       inset: 0;
+
+      width: 100%;
+      height: 100%;
+
       z-index: 2;
+
       touch-action: none;
+
       background: transparent;
+
       pointer-events: auto;
+
+      display: block;
+    }
+
+    /* ============================================================
+       LANDSCAPE
+       ============================================================ */
+
+    @media (orientation: landscape) {
+
+      .memory-stage {
+        padding:
+          18px
+          6vw;
+      }
+
+      .memory-stage .photo-frame {
+        width:
+          min(
+            30vw,
+            230px
+          );
+      }
+
+      .memory-text-wrap {
+        margin-top: 18px;
+
+        max-width:
+          min(
+            48vw,
+            520px
+          );
+      }
+
+      .memory-caption {
+        font-size:
+          clamp(
+            16px,
+            3vw,
+            22px
+          );
+      }
+
+      .memory-date {
+        margin-bottom: 7px;
+
+        font-size: 11px;
+      }
+
+      /*
+        Landscape finale:
+        the name sits high enough to leave
+        a completely separate area for the letter.
+      */
+
+      .identity-core {
+        margin-top: -23vh;
+
+        padding:
+          0
+          8vw;
+      }
+
+      .recipient-name {
+        font-size:
+          clamp(
+            3.5rem,
+            13vh,
+            7rem
+          );
+
+        line-height: 0.88;
+
+        max-width: 90vw;
+      }
+
+      .identity-context {
+        margin-top: 10px;
+      }
+
+      .identity-detail {
+        font-size: 12px;
+      }
+
+      .closing-letter {
+        bottom: 6vh;
+
+        max-width: 70vw;
+
+        padding:
+          0
+          5vw;
+      }
+
+      .letter-body {
+        font-size:
+          clamp(
+            12px,
+            2.5vh,
+            16px
+          );
+
+        line-height: 1.4;
+
+        margin-bottom: 10px;
+      }
+
+      .letter-signature {
+        font-size:
+          clamp(
+            18px,
+            4vh,
+            25px
+          );
+      }
+
+      .letter-relation {
+        font-size: 10px;
+
+        margin-top: 3px;
+      }
+
+      .cluster-fragment {
+        width:
+          min(
+            27vw,
+            200px
+          );
+      }
+
+      /*
+        Spread the background photos outward
+        in landscape so they don't occupy the
+        same territory as the name/message.
+      */
+
+      @keyframes drift1Landscape {
+        0%, 100% {
+          transform:
+            translate(-34vw, -17vh)
+            rotate(-9deg);
+        }
+
+        50% {
+          transform:
+            translate(-32vw, -19vh)
+            rotate(-7deg);
+        }
+      }
+
+      @keyframes drift2Landscape {
+        0%, 100% {
+          transform:
+            translate(34vw, -14vh)
+            rotate(6deg);
+        }
+
+        50% {
+          transform:
+            translate(32vw, -11vh)
+            rotate(5deg);
+        }
+      }
+
+      @keyframes drift3Landscape {
+        0%, 100% {
+          transform:
+            translate(30vw, 22vh)
+            rotate(-5deg);
+        }
+
+        50% {
+          transform:
+            translate(28vw, 20vh)
+            rotate(-4deg);
+        }
+      }
+
+      #finale-layer.show
+      .cluster-fragment:nth-child(1) {
+        animation:
+          drift1Landscape
+          18s
+          ease-in-out
+          infinite;
+      }
+
+      #finale-layer.show
+      .cluster-fragment:nth-child(2) {
+        animation:
+          drift2Landscape
+          22s
+          ease-in-out
+          infinite;
+
+        animation-delay: -3s;
+      }
+
+      #finale-layer.show
+      .cluster-fragment:nth-child(3) {
+        animation:
+          drift3Landscape
+          20s
+          ease-in-out
+          infinite;
+
+        animation-delay: -7s;
+      }
+    }
+
+    /* ============================================================
+       SHORT LANDSCAPE
+       ============================================================ */
+
+    @media
+      (orientation: landscape)
+      and (max-height: 500px) {
+
+      .identity-core {
+        margin-top: -25vh;
+      }
+
+      .recipient-name {
+        font-size:
+          clamp(
+            3rem,
+            15vh,
+            5rem
+          );
+      }
+
+      .identity-context {
+        margin-top: 7px;
+      }
+
+      .closing-letter {
+        bottom: 4vh;
+      }
+
+      .letter-body {
+        font-size:
+          clamp(
+            11px,
+            2.7vh,
+            14px
+          );
+
+        line-height: 1.32;
+
+        margin-bottom: 6px;
+      }
+
+      .letter-signature {
+        font-size:
+          clamp(
+            16px,
+            4vh,
+            22px
+          );
+      }
+    }
+
+    /* ============================================================
+       VERY WIDE DESKTOP
+       ============================================================ */
+
+    @media
+      (min-width: 900px)
+      and (orientation: landscape) {
+
+      .memory-stage .photo-frame {
+        width: 230px;
+      }
+
+      .memory-text-wrap {
+        max-width: 520px;
+      }
+
+      .recipient-name {
+        font-size:
+          clamp(
+            5rem,
+            13vh,
+            8rem
+          );
+      }
+
+      .closing-letter {
+        max-width: 620px;
+      }
+
+      .letter-body {
+        font-size: 16px;
+      }
+    }
+
+    /* ============================================================
+       REDUCED MOTION
+       ============================================================ */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      .memory-stage,
+      .memory-text-wrap,
+      #finale-layer,
+      .recipient-name,
+      .identity-context,
+      .closing-letter,
+      .cluster-fragment {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
   </style>
 </head>
@@ -452,36 +1004,78 @@
     <div id="content-layer">
 
       <div class="memory-stage" id="mem-0">
+
         <div class="photo-frame" id="wrap-0">
-          <img id="img-0" src="" alt="" draggable="false">
+          <img
+            id="img-0"
+            src=""
+            alt=""
+            draggable="false"
+          >
         </div>
 
         <div class="memory-text-wrap">
-          <div class="memory-date" id="date-0"></div>
-          <div class="memory-caption" id="text-0"></div>
+          <div
+            class="memory-date"
+            id="date-0"
+          ></div>
+
+          <div
+            class="memory-caption"
+            id="text-0"
+          ></div>
         </div>
+
       </div>
 
       <div class="memory-stage" id="mem-1">
+
         <div class="photo-frame" id="wrap-1">
-          <img id="img-1" src="" alt="" draggable="false">
+          <img
+            id="img-1"
+            src=""
+            alt=""
+            draggable="false"
+          >
         </div>
 
         <div class="memory-text-wrap">
-          <div class="memory-date" id="date-1"></div>
-          <div class="memory-caption" id="text-1"></div>
+          <div
+            class="memory-date"
+            id="date-1"
+          ></div>
+
+          <div
+            class="memory-caption"
+            id="text-1"
+          ></div>
         </div>
+
       </div>
 
       <div class="memory-stage" id="mem-2">
+
         <div class="photo-frame" id="wrap-2">
-          <img id="img-2" src="" alt="" draggable="false">
+          <img
+            id="img-2"
+            src=""
+            alt=""
+            draggable="false"
+          >
         </div>
 
         <div class="memory-text-wrap">
-          <div class="memory-date" id="date-2"></div>
-          <div class="memory-caption" id="text-2"></div>
+          <div
+            class="memory-date"
+            id="date-2"
+          ></div>
+
+          <div
+            class="memory-caption"
+            id="text-2"
+          ></div>
         </div>
+
       </div>
 
     </div>
@@ -491,28 +1085,62 @@
       <div class="composition-cluster">
 
         <div class="cluster-fragment">
-          <img id="frag-0" src="" alt="">
+          <img
+            id="frag-0"
+            src=""
+            alt=""
+          >
         </div>
 
         <div class="cluster-fragment">
-          <img id="frag-1" src="" alt="">
+          <img
+            id="frag-1"
+            src=""
+            alt=""
+          >
         </div>
 
         <div class="cluster-fragment">
-          <img id="frag-2" src="" alt="">
+          <img
+            id="frag-2"
+            src=""
+            alt=""
+          >
         </div>
 
       </div>
 
       <div class="identity-core">
-        <h1 class="recipient-name" id="finale-name"></h1>
-        <div class="identity-context" id="finale-context"></div>
+
+        <h1
+          class="recipient-name"
+          id="finale-name"
+        ></h1>
+
+        <div
+          class="identity-context"
+          id="finale-context"
+        ></div>
+
       </div>
 
       <div class="closing-letter">
-        <div class="letter-body" id="finale-msg"></div>
-        <div class="letter-signature" id="finale-from"></div>
-        <div class="letter-relation" id="finale-relation"></div>
+
+        <div
+          class="letter-body"
+          id="finale-msg"
+        ></div>
+
+        <div
+          class="letter-signature"
+          id="finale-from"
+        ></div>
+
+        <div
+          class="letter-relation"
+          id="finale-relation"
+        ></div>
+
       </div>
 
     </div>
@@ -522,9 +1150,9 @@
   </main>
 
   <script>
-    /* ==========================================================================
+    /* ================================================================
        CONFIG
-       ========================================================================== */
+       ================================================================= */
 
     const CONFIG = {
       recipientName: "Milo",
@@ -532,9 +1160,9 @@
       age: 2,
 
       senderName: "Jarock",
-      relationship: "Your big best friend",
+      relationship: "Your Big Best Friend",
 
-      favoriteColor: "#6FAF8F",
+      favoriteColor: "#49f065",
 
       photos: [
         "photo-1.jpg",
@@ -545,52 +1173,73 @@
       memories: [
         {
           date: "Just a sleepy Milo",
-          text: "Milo completely knocked out, sleeping peacefully."
+          text: "Milo completely knocked out, sleeping peacefully like he doesn’t have a single worry in the world."
         },
         {
           date: "Milo & Shiloh",
-          text: "Milo spending a little time with his brother Shiloh."
+          text: "Milo and his brother Shiloh together."
         },
         {
           date: "Just being Milo",
-          text: "Milo laying down on the ground, just being his goofy little self."
+          text: "Milo laying down on the ground, just doing his thing and being his goofy little self."
         }
       ],
 
       message: "Happy 2nd birthday, Milo. You’re my little best friend, and somehow you make every day better just by being around. I’m glad I get to grow up with you. Love you, buddy."
     };
 
-    /* ==========================================================================
-       PIGMENT ENGINE
-       ========================================================================== */
+
+    /* ================================================================
+       HELPERS
+       ================================================================= */
 
     function hexToRgb(hex) {
-      let clean = hex.replace('#', '').trim();
+
+      let clean =
+        String(hex || "#8A5CF6")
+          .replace("#", "")
+          .trim();
 
       if (clean.length === 3) {
-        clean = clean
-          .split('')
-          .map(c => c + c)
-          .join('');
+
+        clean =
+          clean
+            .split("")
+            .map(c => c + c)
+            .join("");
       }
 
-      const int = parseInt(clean, 16) || 0;
+      const int =
+        parseInt(clean, 16) || 0;
 
       return {
+
         r: (int >> 16) & 255,
+
         g: (int >> 8) & 255,
+
         b: int & 255
+
       };
     }
 
-    function getLuminance(r, g, b) {
-      const a = [r, g, b].map(v => {
-        v /= 255;
 
-        return v <= 0.03928
-          ? v / 12.92
-          : Math.pow((v + 0.055) / 1.055, 2.4);
-      });
+    function getLuminance(r, g, b) {
+
+      const a =
+        [r, g, b].map(v => {
+
+          v /= 255;
+
+          return v <= 0.03928
+
+            ? v / 12.92
+
+            : Math.pow(
+                (v + 0.055) / 1.055,
+                2.4
+              );
+        });
 
       return (
         0.2126 * a[0] +
@@ -599,33 +1248,52 @@
       );
     }
 
-    function getOrdinal(n) {
-      const s = ["th", "st", "nd", "rd"];
-      const v = n % 100;
 
-      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    function getOrdinal(n) {
+
+      const s =
+        ["th", "st", "nd", "rd"];
+
+      const v =
+        n % 100;
+
+      return (
+        n +
+        (
+          s[(v - 20) % 10] ||
+          s[v] ||
+          s[0]
+        )
+      );
     }
 
-    const rgb = hexToRgb(
-      CONFIG.favoriteColor || "#8A5CF6"
-    );
 
-    const lum = getLuminance(
-      rgb.r,
-      rgb.g,
-      rgb.b
-    );
+    /* ================================================================
+       COLOR SYSTEM
+       ================================================================= */
+
+    const rgb =
+      hexToRgb(
+        CONFIG.favoriteColor
+      );
+
+    const lum =
+      getLuminance(
+        rgb.r,
+        rgb.g,
+        rgb.b
+      );
 
     const root =
       document.documentElement;
 
     root.style.setProperty(
-      '--pigment',
+      "--pigment",
       CONFIG.favoriteColor
     );
 
     root.style.setProperty(
-      '--pigment-rgb',
+      "--pigment-rgb",
       `${rgb.r}, ${rgb.g}, ${rgb.b}`
     );
 
@@ -635,124 +1303,164 @@
       b: 24
     };
 
+
     if (lum > 0.55) {
 
       root.style.setProperty(
-        '--canvas-bg',
-        '#09090b'
+        "--canvas-bg",
+        "#09090b"
       );
 
       root.style.setProperty(
-        '--ink-primary',
-        '#F4F4F5'
+        "--ink-primary",
+        "#F4F4F5"
       );
 
       root.style.setProperty(
-        '--ink-secondary',
-        'rgba(244, 244, 245, 0.70)'
+        "--ink-secondary",
+        "rgba(244, 244, 245, 0.70)"
       );
 
       root.style.setProperty(
-        '--ink-faint',
-        'rgba(244, 244, 245, 0.35)'
+        "--ink-faint",
+        "rgba(244, 244, 245, 0.35)"
       );
 
       root.style.setProperty(
-        '--surface',
-        '#0a0a0c'
+        "--surface",
+        "#0a0a0c"
       );
 
       root.style.setProperty(
-        '--surface-shadow',
-        'rgba(0, 0, 0, 0.95)'
-      );
-
-      root.style.setProperty(
-        '--pigment',
-        CONFIG.favoriteColor
+        "--surface-shadow",
+        "rgba(0, 0, 0, 0.95)"
       );
 
       powderTone = {
-        r: Math.floor(rgb.r * 0.40 + 12),
-        g: Math.floor(rgb.g * 0.40 + 12),
-        b: Math.floor(rgb.b * 0.40 + 14)
+
+        r:
+          Math.floor(
+            rgb.r * 0.40 + 12
+          ),
+
+        g:
+          Math.floor(
+            rgb.g * 0.40 + 12
+          ),
+
+        b:
+          Math.floor(
+            rgb.b * 0.40 + 14
+          )
+
       };
 
     } else {
 
       const bgR =
-        Math.floor(rgb.r * 0.04 + 8);
+        Math.floor(
+          rgb.r * 0.04 + 8
+        );
 
       const bgG =
-        Math.floor(rgb.g * 0.04 + 8);
+        Math.floor(
+          rgb.g * 0.04 + 8
+        );
 
       const bgB =
-        Math.floor(rgb.b * 0.04 + 10);
+        Math.floor(
+          rgb.b * 0.04 + 10
+        );
 
       root.style.setProperty(
-        '--canvas-bg',
+        "--canvas-bg",
         `rgb(${bgR}, ${bgG}, ${bgB})`
       );
 
       root.style.setProperty(
-        '--ink-primary',
-        '#F4F4F5'
+        "--ink-primary",
+        "#F4F4F5"
       );
 
       root.style.setProperty(
-        '--ink-secondary',
-        'rgba(244, 244, 245, 0.70)'
+        "--ink-secondary",
+        "rgba(244, 244, 245, 0.70)"
       );
 
       root.style.setProperty(
-        '--ink-faint',
-        'rgba(244, 244, 245, 0.35)'
+        "--ink-faint",
+        "rgba(244, 244, 245, 0.35)"
       );
 
       root.style.setProperty(
-        '--surface',
-        '#0a0a0c'
+        "--surface",
+        "#0a0a0c"
       );
 
       root.style.setProperty(
-        '--surface-shadow',
-        'rgba(0, 0, 0, 0.85)'
+        "--surface-shadow",
+        "rgba(0, 0, 0, 0.85)"
       );
 
       if (lum < 0.10) {
+
         root.style.setProperty(
-          '--pigment',
-          '#A1A1AA'
+          "--pigment",
+          "#A1A1AA"
         );
       }
 
       powderTone = {
-        r: Math.floor(rgb.r * 0.40 + 12),
-        g: Math.floor(rgb.g * 0.40 + 12),
-        b: Math.floor(rgb.b * 0.40 + 14)
+
+        r:
+          Math.floor(
+            rgb.r * 0.40 + 12
+          ),
+
+        g:
+          Math.floor(
+            rgb.g * 0.40 + 12
+          ),
+
+        b:
+          Math.floor(
+            rgb.b * 0.40 + 14
+          )
+
       };
     }
 
-    /* ==========================================================================
+
+    /* ================================================================
        POPULATE CONTENT
-       ========================================================================== */
+       ================================================================= */
 
     for (let i = 0; i < 3; i++) {
 
       const img =
-        document.getElementById(`img-${i}`);
+        document.getElementById(
+          `img-${i}`
+        );
 
       const frag =
-        document.getElementById(`frag-${i}`);
+        document.getElementById(
+          `frag-${i}`
+        );
 
       const dateEl =
-        document.getElementById(`date-${i}`);
+        document.getElementById(
+          `date-${i}`
+        );
 
       const textEl =
-        document.getElementById(`text-${i}`);
+        document.getElementById(
+          `text-${i}`
+        );
 
       const wrapper =
-        document.getElementById(`wrap-${i}`);
+        document.getElementById(
+          `wrap-${i}`
+        );
 
       if (CONFIG.photos[i]) {
 
@@ -762,12 +1470,8 @@
         frag.src =
           CONFIG.photos[i];
 
-        /*
-          This supplies the blurred continuation
-          behind the complete photograph.
-        */
         wrapper.style.setProperty(
-          '--photo-bg',
+          "--photo-bg",
           `url("${CONFIG.photos[i]}")`
         );
       }
@@ -782,86 +1486,105 @@
       }
     }
 
-    /* ==========================================================================
-       FINALE IDENTITY
-       ========================================================================== */
+
+    /* ================================================================
+       FINALE
+       ================================================================= */
 
     document
-      .getElementById('finale-name')
+      .getElementById("finale-name")
       .textContent =
       CONFIG.recipientName;
 
+
     const contextBox =
       document.getElementById(
-        'finale-context'
+        "finale-context"
       );
+
 
     if (CONFIG.age) {
 
       const birthdayEl =
-        document.createElement('div');
+        document.createElement("div");
 
       birthdayEl.className =
-        'identity-detail';
+        "identity-detail";
 
       birthdayEl.textContent =
-        `Happy ${getOrdinal(CONFIG.age)} Birthday${CONFIG.nickname ? `, ${CONFIG.nickname}` : ''}`;
+        `Happy ${getOrdinal(CONFIG.age)} Birthday${
+          CONFIG.nickname
+            ? `, ${CONFIG.nickname}`
+            : ""
+        }`;
 
       contextBox.appendChild(
         birthdayEl
       );
     }
 
-    /* ==========================================================================
-       FINALE MESSAGE
-       ========================================================================== */
 
     document
-      .getElementById('finale-msg')
+      .getElementById("finale-msg")
       .textContent =
       CONFIG.message;
 
+
     document
-      .getElementById('finale-from')
+      .getElementById("finale-from")
       .textContent =
       CONFIG.senderName || "";
 
+
     document
-      .getElementById('finale-relation')
+      .getElementById("finale-relation")
       .textContent =
       CONFIG.relationship || "";
 
-    /* ==========================================================================
+
+    /* ================================================================
        CANVAS
-       ========================================================================== */
+       ================================================================= */
 
     const canvas =
       document.getElementById(
-        'canvas-powder'
+        "canvas-powder"
       );
 
     const ctx =
-      canvas.getContext('2d');
+      canvas.getContext(
+        "2d",
+        {
+          alpha: true
+        }
+      );
+
 
     let W = 0;
     let H = 0;
     let dpr = 1;
 
+
     const puffCanvas =
       document.createElement(
-        'canvas'
+        "canvas"
       );
 
     const puffCtx =
-      puffCanvas.getContext('2d');
+      puffCanvas.getContext(
+        "2d"
+      );
+
 
     const PUFF_DIAMETER = 64;
+
 
     puffCanvas.width =
       PUFF_DIAMETER;
 
     puffCanvas.height =
       PUFF_DIAMETER;
+
 
     function buildPuffSprite() {
 
@@ -872,8 +1595,10 @@
         PUFF_DIAMETER
       );
 
+
       const rad =
         PUFF_DIAMETER / 2;
+
 
       const grad =
         puffCtx.createRadialGradient(
@@ -885,8 +1610,14 @@
           rad
         );
 
+
       const col =
-        `rgb(${powderTone.r}, ${powderTone.g}, ${powderTone.b})`;
+        `rgb(
+          ${powderTone.r},
+          ${powderTone.g},
+          ${powderTone.b}
+        )`;
+
 
       grad.addColorStop(
         0,
@@ -908,10 +1639,13 @@
         )`
       );
 
+
       puffCtx.fillStyle =
         grad;
 
+
       puffCtx.beginPath();
+
 
       puffCtx.arc(
         rad,
@@ -921,12 +1655,15 @@
         Math.PI * 2
       );
 
+
       puffCtx.fill();
     }
 
+
     buildPuffSprite();
 
-    function resize() {
+
+    function resizeCanvas() {
 
       W =
         window.innerWidth;
@@ -940,17 +1677,24 @@
           2
         );
 
+
       canvas.width =
-        W * dpr;
+        Math.round(
+          W * dpr
+        );
 
       canvas.height =
-        H * dpr;
+        Math.round(
+          H * dpr
+        );
+
 
       canvas.style.width =
-        W + 'px';
+        `${W}px`;
 
       canvas.style.height =
-        H + 'px';
+        `${H}px`;
+
 
       ctx.setTransform(
         dpr,
@@ -962,22 +1706,24 @@
       );
     }
 
-    window.addEventListener(
-      'resize',
-      resize
-    );
 
-    resize();
+    resizeCanvas();
 
-    /* ==========================================================================
+
+    /* ================================================================
        POWDER ENGINE
-       ========================================================================== */
+       ================================================================= */
 
     let particles = [];
+
     let currentStep = 0;
+
     let isTransitioning = false;
+
     let totalCoverCount = 0;
+
     let clearedCount = 0;
+
 
     class PowderParticle {
 
@@ -989,23 +1735,35 @@
       ) {
 
         this.x = x;
+
         this.y = y;
-        this.radius = radius;
+
+        this.radius =
+          radius;
+
         this.isBaseCover =
           isBaseCover;
 
-        this.active = false;
-        this.alpha = 1.0;
+        this.active =
+          false;
 
-        this.vx = 0;
-        this.vy = 0;
+        this.alpha =
+          1;
 
-        this.scale = 1.0;
+        this.vx =
+          0;
+
+        this.vy =
+          0;
+
+        this.scale =
+          1;
 
         this.decay =
           0.024 +
           Math.random() * 0.018;
       }
+
 
       disperse(
         touchX,
@@ -1014,18 +1772,29 @@
         dragVy = 0
       ) {
 
-        if (this.active) return;
+        if (this.active)
+          return;
 
-        this.active = true;
+
+        this.active =
+          true;
+
 
         const dx =
-          this.x - touchX;
+          this.x -
+          touchX;
 
         const dy =
-          this.y - touchY;
+          this.y -
+          touchY;
+
 
         const dist =
-          Math.hypot(dx, dy) || 1;
+          Math.hypot(
+            dx,
+            dy
+          ) || 1;
+
 
         const speed =
           Math.min(
@@ -1033,10 +1802,12 @@
             (1 - dist / 55) * 5 + 2
           );
 
+
         this.vx =
           (dx / dist) * speed +
           dragVx * 0.28 +
           (Math.random() - 0.5) * 1.5;
+
 
         this.vy =
           (dy / dist) * speed +
@@ -1044,24 +1815,40 @@
           Math.random() * 1.8;
       }
 
+
       update() {
 
-        if (this.active) {
+        if (!this.active)
+          return;
 
-          this.x += this.vx;
-          this.y += this.vy;
 
-          this.vx *= 0.93;
-          this.vy *= 0.93;
+        this.x +=
+          this.vx;
 
-          this.scale += 0.015;
-          this.alpha -= this.decay;
-        }
+        this.y +=
+          this.vy;
+
+
+        this.vx *=
+          0.93;
+
+        this.vy *=
+          0.93;
+
+
+        this.scale +=
+          0.015;
+
+        this.alpha -=
+          this.decay;
       }
+
 
       draw() {
 
-        if (this.alpha <= 0) return;
+        if (this.alpha <= 0)
+          return;
+
 
         ctx.globalAlpha =
           Math.max(
@@ -1069,70 +1856,97 @@
             this.alpha
           );
 
+
         const drawRadius =
           this.radius *
           this.scale;
 
+
         ctx.drawImage(
           puffCanvas,
-          this.x - drawRadius,
-          this.y - drawRadius,
+
+          this.x -
+            drawRadius,
+
+          this.y -
+            drawRadius,
+
           drawRadius * 2,
+
           drawRadius * 2
         );
       }
     }
 
-    function generateCoverForMemory(step) {
 
-      currentStep =
-        step;
+    /* ================================================================
+       BUILD POWDER
+       ================================================================= */
 
-      clearedCount =
-        0;
-
-      totalCoverCount =
-        0;
-
-      document
-        .querySelectorAll(
-          '.memory-stage'
-        )
-        .forEach(
-          (el, i) => {
-
-            el.classList.toggle(
-              'active',
-              i === step
-            );
-          }
-        );
+    function buildPowderForMemory(
+      step,
+      preserveOldParticles = true
+    ) {
 
       const wrapper =
         document.getElementById(
           `wrap-${step}`
         );
 
+
+      if (!wrapper)
+        return;
+
+
       const rect =
         wrapper.getBoundingClientRect();
 
-      const pad = 12;
-      const stepSize = 13;
-      const pRadius = 26;
+
+      /*
+        Critical responsive fix:
+
+        We don't use the canvas dimensions to
+        determine where the powder belongs.
+
+        We always use the LIVE DOM rectangle
+        of the actual photograph.
+
+        This means the powder follows the photo
+        after rotation, resize, browser resizing,
+        or mobile viewport changes.
+      */
+
+
+      const pad =
+        12;
+
+      const stepSize =
+        13;
+
+      const pRadius =
+        26;
+
 
       const startX =
-        rect.left - pad;
+        rect.left -
+        pad;
 
       const endX =
-        rect.right + pad;
+        rect.right +
+        pad;
 
       const startY =
-        rect.top - pad;
+        rect.top -
+        pad;
 
       const endY =
-        rect.bottom + pad;
+        rect.bottom +
+        pad;
 
-      const newParticles = [];
+
+      const newParticles =
+        [];
+
 
       for (
         let y = startY;
@@ -1152,11 +1966,13 @@
           const jitterY =
             (Math.random() - 0.5) * 4;
 
+
           const isInsidePhoto =
             x >= rect.left &&
             x <= rect.right &&
             y >= rect.top &&
             y <= rect.bottom;
+
 
           const p =
             new PowderParticle(
@@ -1166,7 +1982,9 @@
               isInsidePhoto
             );
 
+
           newParticles.push(p);
+
 
           if (isInsidePhoto) {
             totalCoverCount++;
@@ -1174,63 +1992,333 @@
         }
       }
 
+
+      /*
+        Small atmospheric halo.
+      */
+
       for (let i = 0; i < 90; i++) {
 
         const x =
           rect.left +
           Math.random() *
-          rect.width +
+            rect.width +
           (Math.random() - 0.5) * 36;
+
 
         const y =
           rect.top +
           Math.random() *
-          rect.height +
+            rect.height +
           (Math.random() - 0.5) * 36;
+
 
         newParticles.push(
           new PowderParticle(
             x,
             y,
             pRadius *
-              (0.8 +
-              Math.random() * 0.4),
+              (
+                0.8 +
+                Math.random() * 0.4
+              ),
             false
           )
         );
       }
 
-      particles =
-        particles
-          .filter(
-            p =>
-              p.active &&
-              p.alpha > 0
-          )
-          .concat(
-            newParticles
-          );
 
-      isTransitioning =
-        false;
+      if (preserveOldParticles) {
 
-      document
-        .getElementById(
-          'pigment-wash'
-        )
-        .style.opacity =
-        '0.8';
+        particles =
+          particles
+            .filter(
+              p =>
+                p.active &&
+                p.alpha > 0
+            )
+            .concat(
+              newParticles
+            );
+
+      } else {
+
+        particles =
+          newParticles;
+      }
     }
 
-    /* ==========================================================================
+
+    function generateCoverForMemory(
+      step
+    ) {
+
+      currentStep =
+        step;
+
+
+      clearedCount =
+        0;
+
+
+      totalCoverCount =
+        0;
+
+
+      document
+        .querySelectorAll(
+          ".memory-stage"
+        )
+        .forEach(
+          (el, i) => {
+
+            el.classList.toggle(
+              "active",
+              i === step
+            );
+
+            if (i !== step) {
+
+              el.classList.remove(
+                "revealed"
+              );
+            }
+          }
+        );
+
+
+      /*
+        Force the browser to finish the
+        responsive layout before measuring
+        the photo.
+
+        requestAnimationFrame gives CSS one
+        frame to settle after orientation/
+        viewport changes.
+      */
+
+      requestAnimationFrame(() => {
+
+        buildPowderForMemory(
+          step,
+          true
+        );
+
+        isTransitioning =
+          false;
+
+
+        document
+          .getElementById(
+            "pigment-wash"
+          )
+          .style.opacity =
+          "0.8";
+
+      });
+    }
+
+
+    /* ================================================================
+       RESPONSIVE POWDER REBUILD
+       ================================================================= */
+
+    let resizeTimer = null;
+
+    let lastViewportWidth =
+      window.innerWidth;
+
+    let lastViewportHeight =
+      window.innerHeight;
+
+
+    function handleViewportChange() {
+
+      const width =
+        window.innerWidth;
+
+      const height =
+        window.innerHeight;
+
+
+      if (
+        width === lastViewportWidth &&
+        height === lastViewportHeight
+      ) {
+        return;
+      }
+
+
+      lastViewportWidth =
+        width;
+
+      lastViewportHeight =
+        height;
+
+
+      resizeCanvas();
+
+
+      clearTimeout(
+        resizeTimer
+      );
+
+
+      resizeTimer =
+        setTimeout(
+          () => {
+
+            /*
+              Do not interfere with the
+              finale.
+
+              The finale is pure CSS and
+              responds naturally.
+            */
+
+            if (
+              document
+                .getElementById(
+                  "finale-layer"
+                )
+                .classList
+                .contains("show")
+            ) {
+
+              fitFinaleMessage();
+
+              return;
+            }
+
+
+            /*
+              If we're still revealing a
+              memory, rebuild the powder
+              around the photograph.
+
+              We intentionally do not do this
+              while the user is actively wiping,
+              because rebuilding underneath
+              their finger would feel broken.
+            */
+
+            if (
+              isInteracting ||
+              isTransitioning
+            ) {
+
+              return;
+            }
+
+
+            const activeStage =
+              document.querySelector(
+                ".memory-stage.active"
+              );
+
+
+            if (!activeStage)
+              return;
+
+
+            const wrapper =
+              activeStage.querySelector(
+                ".photo-frame"
+              );
+
+
+            if (!wrapper)
+              return;
+
+
+            /*
+              If the memory is already fully
+              revealed, there is no cover to
+              rebuild.
+            */
+
+            if (
+              activeStage.classList.contains(
+                "revealed"
+              )
+            ) {
+
+              return;
+            }
+
+
+            /*
+              Rebuild from scratch so there
+              cannot be stale particles from
+              the old orientation.
+            */
+
+            totalCoverCount =
+              0;
+
+            clearedCount =
+              0;
+
+            particles =
+              [];
+
+
+            buildPowderForMemory(
+              currentStep,
+              false
+            );
+
+          },
+          100
+        );
+    }
+
+
+    window.addEventListener(
+      "resize",
+      handleViewportChange
+    );
+
+
+    window.addEventListener(
+      "orientationchange",
+      () => {
+
+        /*
+          Orientation changes can report the
+          old dimensions for a moment on iOS.
+        */
+
+        setTimeout(
+          handleViewportChange,
+          120
+        );
+
+        setTimeout(
+          handleViewportChange,
+          350
+        );
+      }
+    );
+
+
+    /* ================================================================
        SWIPE
-       ========================================================================== */
+       ================================================================= */
 
-    let isInteracting = false;
-    let lastX = 0;
-    let lastY = 0;
+    let isInteracting =
+      false;
 
-    const SWIPE_RADIUS = 52;
+    let lastX =
+      0;
+
+    let lastY =
+      0;
+
+
+    const SWIPE_RADIUS =
+      52;
+
 
     function applyWipeAt(
       x,
@@ -1242,6 +2330,7 @@
       if (isTransitioning)
         return;
 
+
       for (
         let i = 0;
         i < particles.length;
@@ -1251,6 +2340,7 @@
         const p =
           particles[i];
 
+
         if (!p.active) {
 
           const d =
@@ -1258,6 +2348,7 @@
               p.x - x,
               p.y - y
             );
+
 
           if (
             d <
@@ -1271,14 +2362,22 @@
               vy
             );
 
+
             if (
               p.isBaseCover
             ) {
+
               clearedCount++;
             }
           }
         }
       }
+
+
+      /*
+        Keep the reveal threshold from
+        changing your current interaction.
+      */
 
       if (
         totalCoverCount > 0 &&
@@ -1292,16 +2391,45 @@
       }
     }
 
+
     function onPointerDown(e) {
+
+      if (
+        document
+          .getElementById(
+            "finale-layer"
+          )
+          .classList
+          .contains("show")
+      ) {
+        return;
+      }
+
 
       isInteracting =
         true;
+
 
       lastX =
         e.clientX;
 
       lastY =
         e.clientY;
+
+
+      /*
+        Pointer capture makes the interaction
+        more reliable on desktop browsers.
+      */
+
+      try {
+
+        canvas.setPointerCapture(
+          e.pointerId
+        );
+
+      } catch (_) {}
+
 
       applyWipeAt(
         lastX,
@@ -1311,10 +2439,12 @@
       );
     }
 
+
     function onPointerMove(e) {
 
       if (!isInteracting)
         return;
+
 
       const x =
         e.clientX;
@@ -1322,17 +2452,22 @@
       const y =
         e.clientY;
 
+
       const dx =
-        x - lastX;
+        x -
+        lastX;
 
       const dy =
-        y - lastY;
+        y -
+        lastY;
+
 
       const dist =
         Math.hypot(
           dx,
           dy
         );
+
 
       const steps =
         Math.max(
@@ -1341,6 +2476,7 @@
             dist / 14
           )
         );
+
 
       for (
         let i = 1;
@@ -1356,6 +2492,7 @@
           lastY +
           (dy / steps) * i;
 
+
         applyWipeAt(
           ix,
           iy,
@@ -1364,75 +2501,110 @@
         );
       }
 
-      lastX = x;
-      lastY = y;
+
+      lastX =
+        x;
+
+      lastY =
+        y;
     }
 
-    function onPointerUp() {
+
+    function onPointerUp(e) {
+
       isInteracting =
         false;
+
+
+      try {
+
+        if (
+          e &&
+          canvas.hasPointerCapture(
+            e.pointerId
+          )
+        ) {
+
+          canvas.releasePointerCapture(
+            e.pointerId
+          );
+        }
+
+      } catch (_) {}
     }
 
+
     canvas.addEventListener(
-      'pointerdown',
+      "pointerdown",
       onPointerDown
     );
 
     window.addEventListener(
-      'pointermove',
+      "pointermove",
       onPointerMove
     );
 
     window.addEventListener(
-      'pointerup',
+      "pointerup",
       onPointerUp
     );
 
     window.addEventListener(
-      'pointercancel',
+      "pointercancel",
       onPointerUp
     );
 
-    /* ==========================================================================
-       PROGRESSION
-       ========================================================================== */
+
+    /* ================================================================
+       MEMORY PROGRESSION
+       ================================================================= */
 
     function triggerMemoryRevealed() {
 
+      if (isTransitioning)
+        return;
+
+
       isTransitioning =
         true;
+
 
       const currentMem =
         document.getElementById(
           `mem-${currentStep}`
         );
 
+
       currentMem.classList.add(
-        'revealed'
+        "revealed"
       );
+
+
+      /*
+        Release the remaining powder.
+      */
 
       particles.forEach(
         p => {
 
           if (!p.active) {
 
-            p.active = true;
+            p.active =
+              true;
 
             p.vx =
-              (Math.random() - 0.5) *
-              1.5;
+              (Math.random() - 0.5) * 1.5;
 
             p.vy =
-              -Math.random() *
-              1.8;
+              -Math.random() * 1.8;
 
             p.decay =
               0.016 +
-              Math.random() *
-              0.01;
+              Math.random() * 0.01;
           }
         }
       );
+
 
       setTimeout(
         () => {
@@ -1442,8 +2614,9 @@
           ) {
 
             currentMem.classList.add(
-              'retiring'
+              "retiring"
             );
+
 
             setTimeout(
               () => {
@@ -1466,71 +2639,236 @@
       );
     }
 
+
+    /* ================================================================
+       FINALE
+       ================================================================= */
+
     function launchFinale() {
 
       const currentMem =
         document.getElementById(
-          'mem-2'
+          "mem-2"
         );
 
+
       currentMem.classList.add(
-        'retiring'
+        "retiring"
       );
+
 
       particles.forEach(
         p => {
 
-          p.active = true;
+          p.active =
+            true;
 
           p.vx =
-            (Math.random() - 0.5) *
-            2.8;
+            (Math.random() - 0.5) * 2.8;
 
           p.vy =
-            (Math.random() - 0.5) *
-            2.8;
+            (Math.random() - 0.5) * 2.8;
 
           p.decay =
             0.014;
         }
       );
 
+
       setTimeout(
         () => {
 
           document
             .getElementById(
-              'content-layer'
+              "content-layer"
             )
             .style.display =
-            'none';
+            "none";
+
 
           canvas.style.pointerEvents =
-            'none';
+            "none";
+
 
           document
             .getElementById(
-              'pigment-wash'
+              "pigment-wash"
             )
             .style.opacity =
-            '1';
+            "1";
 
-          document
-            .getElementById(
-              'finale-layer'
-            )
-            .classList.add(
-              'show'
+
+          const finale =
+            document.getElementById(
+              "finale-layer"
             );
+
+
+          finale.classList.add(
+            "show"
+          );
+
+
+          /*
+            Give the browser a moment to
+            calculate the final responsive
+            layout before fitting the message.
+          */
+
+          requestAnimationFrame(
+            () => {
+
+              requestAnimationFrame(
+                fitFinaleMessage
+              );
+
+            }
+          );
 
         },
         1200
       );
     }
 
-    /* ==========================================================================
+
+    /* ================================================================
+       FINALE MESSAGE FITTING
+       ================================================================= */
+
+    function fitFinaleMessage() {
+
+      const finale =
+        document.getElementById(
+          "finale-layer"
+        );
+
+
+      if (
+        !finale.classList.contains(
+          "show"
+        )
+      ) {
+        return;
+      }
+
+
+      const letter =
+        document.querySelector(
+          ".closing-letter"
+        );
+
+
+      const body =
+        document.getElementById(
+          "finale-msg"
+        );
+
+
+      if (
+        !letter ||
+        !body
+      ) {
+        return;
+      }
+
+
+      /*
+        Landscape has significantly less
+        vertical room, so calculate the
+        available space rather than trusting
+        a fixed font size.
+      */
+
+      const landscape =
+        window.innerWidth >
+        window.innerHeight;
+
+
+      const maxSize =
+        landscape
+          ? 16
+          : 18;
+
+
+      const minSize =
+        landscape
+          ? 10
+          : 12;
+
+
+      let size =
+        maxSize;
+
+
+      body.style.fontSize =
+        `${size}px`;
+
+
+      /*
+        We don't allow the message to consume
+        the signature's territory.
+
+        This keeps even long custom messages
+        from crashing into the name.
+      */
+
+      const available =
+        landscape
+          ? Math.max(
+              70,
+              window.innerHeight * 0.24
+            )
+          : Math.max(
+              100,
+              window.innerHeight * 0.22
+            );
+
+
+      while (
+        body.scrollHeight > available &&
+        size > minSize
+      ) {
+
+        size -= 0.5;
+
+        body.style.fontSize =
+          `${size}px`;
+      }
+    }
+
+
+    window.addEventListener(
+      "resize",
+      () => {
+
+        requestAnimationFrame(
+          fitFinaleMessage
+        );
+
+      }
+    );
+
+
+    window.addEventListener(
+      "orientationchange",
+      () => {
+
+        setTimeout(
+          fitFinaleMessage,
+          150
+        );
+
+        setTimeout(
+          fitFinaleMessage,
+          400
+        );
+      }
+    );
+
+
+    /* ================================================================
        ANIMATION LOOP
-       ========================================================================== */
+       ================================================================= */
 
     function frame() {
 
@@ -1540,6 +2878,11 @@
         W,
         H
       );
+
+
+      ctx.globalAlpha =
+        1;
+
 
       for (
         let i =
@@ -1551,7 +2894,9 @@
         const p =
           particles[i];
 
+
         p.update();
+
 
         if (
           p.alpha <= 0
@@ -1568,25 +2913,148 @@
         }
       }
 
+
+      ctx.globalAlpha =
+        1;
+
+
       requestAnimationFrame(
         frame
       );
     }
 
+
     requestAnimationFrame(
       frame
     );
 
-    /* ==========================================================================
-       INITIAL LAUNCH
-       ========================================================================== */
 
-    window.addEventListener(
-      'DOMContentLoaded',
-      () => {
+    /* ================================================================
+       IMAGE PRELOADING
+       ================================================================= */
+
+    function preloadImages() {
+
+      const urls =
+        CONFIG.photos
+          .filter(Boolean);
+
+
+      if (!urls.length) {
         generateCoverForMemory(0);
+
+        return;
       }
-    );
+
+
+      let remaining =
+        urls.length;
+
+
+      let launched =
+        false;
+
+
+      function finish() {
+
+        if (launched)
+          return;
+
+
+        launched =
+          true;
+
+
+        /*
+          The browser now has the images and
+          layout available before we measure
+          the photo for the powder field.
+        */
+
+        requestAnimationFrame(
+          () => {
+
+            requestAnimationFrame(
+              () => {
+
+                generateCoverForMemory(
+                  0
+                );
+
+              }
+            );
+
+          }
+        );
+      }
+
+
+      urls.forEach(
+        url => {
+
+          const image =
+            new Image();
+
+
+          const done =
+            () => {
+
+              remaining--;
+
+              if (
+                remaining <= 0
+              ) {
+                finish();
+              }
+            };
+
+
+          image.onload =
+            done;
+
+          image.onerror =
+            done;
+
+          image.src =
+            url;
+        }
+      );
+
+
+      /*
+        Safety fallback in case an external
+        image host takes too long.
+      */
+
+      setTimeout(
+        finish,
+        5000
+      );
+    }
+
+
+    /* ================================================================
+       START
+       ================================================================= */
+
+    if (
+      document.readyState ===
+      "loading"
+    ) {
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        preloadImages,
+        {
+          once: true
+        }
+      );
+
+    } else {
+
+      preloadImages();
+    }
+
   </script>
 
 </body>
